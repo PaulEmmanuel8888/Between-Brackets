@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="pagination">
+      <% if(page > 1){ %>
+      <a href="<%= baseUrl %>?page=<%= page - 1 %>">&laquo; Previous</a>
+      <% } %> <% for(let i = 1; i <= totalPages; i++){ %>
+      <a
+        href="<%= baseUrl %>?page=<%= i %>"
+        class="<%= i === page ? 'active' : '' %>"
+        ><%= i %></a
+      >
+      <% } %> <% if(page < totalPages){ %>
+      <a href="<%= baseUrl %>?page=<%= page + 1 %>">Next &raquo;</a>
+      <% } %>
+    </div>
+  </body>
+</html>

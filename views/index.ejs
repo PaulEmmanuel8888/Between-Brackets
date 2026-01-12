@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Between Brackets</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <%- include('../views/partials/head.ejs') %>
   </head>
   <body>
     <!-- nav menu start -->
@@ -22,105 +12,62 @@
     <div class="container main">
       <!-- column1 -->
       <div class="col">
-        <div class="post">
-          <img
-            class="post-img"
-            loading="lazy"
-            src="images/post1.jpeg"
-            alt="post1-image"
-          />
-          <div class="post-info">
-            <h2>Become A Web Developer</h2>
-            <div class="user-info">
-              <img src="images/avatar.png" alt="" />
-              <span>Author Name,</span>
-              <span>December 1, 2024</span>
-              <span class="post-tag">#TECH</span>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-              exercitationem dicta provident voluptatum saepe unde tenetur alias
-              quisquam natus totam.
-            </p>
-          </div>
-        </div>
+        <!-- EJS For Loop Start-->
 
+        <% column1Posts.forEach((post, index) => { %>
         <div class="post">
           <img
             class="post-img"
             loading="lazy"
-            src="images/post2.jpeg"
-            alt="post2-image"
+            src="<%= post.imgUrl %>"
+            alt="post<% index%>-image"
           />
           <div class="post-info">
-            <h2>Become A Web Developer</h2>
+            <h2><%= post.title %></h2>
             <div class="user-info">
               <img src="images/avatar.png" alt="" />
-              <span>Author Name,</span>
-              <span>December 1, 2024</span>
-              <span class="post-tag">#TECH</span>
+              <span><%= post.author %>,</span>
+              <span><%= post.createdAt %></span>
+              <span class="post-tag">#<%= post.category %></span>
             </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-              exercitationem dicta provident voluptatum saepe unde tenetur alias
-              quisquam natus totam.
-            </p>
+            <p><%= post.shortDesc %></p>
           </div>
         </div>
+        <% }) %>
+        <!-- EJS For Loop End-->
       </div>
       <!-- column2 -->
       <div class="col">
-        <div class="post">
-          <img
-            class="post-img"
-            loading="lazy"
-            src="images/post3.jpeg"
-            alt="post3-image"
-          />
-          <div class="post-info">
-            <h2>Become A Web Developer</h2>
-            <div class="user-info">
-              <img src="images/avatar.png" alt="" />
-              <span>Author Name,</span>
-              <span>December 1, 2024</span>
-              <span class="post-tag">#TECH</span>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-              exercitationem dicta provident voluptatum saepe unde tenetur alias
-              quisquam natus totam.
-            </p>
-          </div>
-        </div>
+        <!-- EJS For Loop Start-->
 
+        <% column2Posts.forEach((post, index) => { %>
         <div class="post">
           <img
             class="post-img"
             loading="lazy"
-            src="images/post4.jpg"
-            alt="post4-image"
+            src="<%= post.imgUrl %>"
+            alt="post<% index%>-image"
           />
           <div class="post-info">
-            <h2>Become A Web Developer</h2>
+            <h2><%= post.title %></h2>
             <div class="user-info">
               <img src="images/avatar.png" alt="" />
-              <span>Author Name,</span>
-              <span>December 1, 2024</span>
-              <span class="post-tag">#TECH</span>
+              <span><%= post.author %>,</span>
+              <span><%= post.createdAt %></span>
+              <span class="post-tag">#<%= post.category %></span>
             </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-              exercitationem dicta provident voluptatum saepe unde tenetur alias
-              quisquam natus.
-            </p>
+            <p><%= post.shortDesc %></p>
           </div>
         </div>
+        <% }) %>
+        <!-- EJS For Loop End-->
       </div>
     </div>
     <!-- main content end -->
+    <%- include('partials/pagination', { page, totalPages, baseUrl }) %>
+
     <!-- footer start -->
     <%- include('../views/partials/footer.ejs') %>
     <!-- footer end -->
-    <script src="/js/script.js"></script>
   </body>
 </html>
