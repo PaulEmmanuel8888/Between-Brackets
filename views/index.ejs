@@ -19,11 +19,11 @@
           <img
             class="post-img"
             loading="lazy"
-            src="<%= post.imgUrl %>"
+            src="<%= post.img_url %>"
             alt="post<% index%>-image"
           />
           <div class="post-info">
-            <h2><%= post.title %></h2>
+            <h2> <a href="/posts/<%= post.id %>"><%= post.title %></a> </h2>
             <div class="user-info">
               <img src="images/avatar.png" alt="" />
               <span><%= post.author %>,</span>
@@ -45,11 +45,11 @@
           <img
             class="post-img"
             loading="lazy"
-            src="<%= post.imgUrl %>"
+            src="<%= post.img_url %>"
             alt="post<% index%>-image"
           />
           <div class="post-info">
-            <h2><%= post.title %></h2>
+            <h2> <a href="/posts/<%= post.id %>"><%= post.title %></a> </h2>
             <div class="user-info">
               <img src="images/avatar.png" alt="" />
               <span><%= post.author %>,</span>

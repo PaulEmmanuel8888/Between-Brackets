@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import posts from "./testposts.js";
+import { getAllPosts, getPostById } from "./db/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,12 +20,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Get Routes
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const postsPerPage = 6;
 
   const startIndex = (page - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage;
+
+  const posts = await getAllPosts();
 
   const paginatedPosts = posts.slice(startIndex, endIndex);
 
@@ -41,6 +43,11 @@ app.get("/", (req, res) => {
     totalPages,
     baseUrl: "/",
   });
+});
+app.get("/posts/:id", async (req, res) => {
+  const postId = req.params.id;
+  const post = await getPostById(postId);
+  res.render("post.ejs", { post: post });
 });
 
 app.get("/categories", (req, res) => {
