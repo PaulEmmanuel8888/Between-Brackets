@@ -14,10 +14,23 @@ const db = new pg.Client({
 db.connect();
 
 export async function getAllPosts() {
-  const result = await db.query("SELECT * FROM posts");
+  const result = await db.query("SELECT * FROM posts ORDER BY created_at DESC");
+
   return result.rows;
 }
+
 export async function getPostById(id) {
   const result = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
+  return result.rows[0];
+}
+export async function getPostsByCategory(slug) {
+  const result = await db.query("SELECT * FROM posts WHERE slug = $1", [slug]);
+  return result.rows;
+}
+export async function getLatestPosts() {
+  const result = await db.query(
+    "SELECT * FROM posts ORDER BY created_at DESC FETCH FIRST 10 ROWS ONLY",
+  );
+
   return result.rows;
 }

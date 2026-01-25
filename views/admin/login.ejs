@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
+  <body>
+    <div class="container login-container">
+      <h1>Log In</h1>
+      <div class="login-main">
+        <form action="/admin/login" method="POST">
+          <input
+            id="username"
+            type="text"
+            required
+            name="username"
+            placeholder="Enter your username..."
+          />
+          <input
+            id="password"
+            required
+            type="password"
+            name="password"
+            placeholder="Enter your password..."
+          />
+          <input type="submit" value="Log In" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

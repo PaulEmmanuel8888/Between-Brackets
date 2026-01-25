@@ -4,12 +4,27 @@
     <%- include('../views/partials/head.ejs') %>
   </head>
   <body>
+    <script defer>
+      function handleClick(event) {
+        const categoryDiv = event.target.closest(".category");
+        if (!categoryDiv) return;
+
+        const categoryName = categoryDiv.getAttribute("name");
+
+        window.location.href = `/category/${categoryName}`;
+      }
+    </script>
+
     <%- include('../views/partials/header.ejs') %>
     <h1 class="category-heading">Let's Dive In</h1>
     <div class="container main">
       <div class="col">
         <div class="categories">
-          <div class="post category">
+          <div
+            class="post category"
+            name="javascript"
+            onclick="handleClick(event)"
+          >
             <img
               src="/images/javascript.png"
               alt="JavaScript Image"
@@ -23,7 +38,11 @@
               </p>
             </div>
           </div>
-          <div class="post category">
+          <div
+            class="post category"
+            name="css-design"
+            onclick="handleClick(event)"
+          >
             <img
               src="/images/css.png"
               alt="CSS Image"
@@ -36,7 +55,7 @@
               <p>Create beautiful, responsive layouts and user interfaces.</p>
             </div>
           </div>
-          <div class="post category">
+          <div class="post category" name="nodejs" onclick="handleClick(event)">
             <img
               src="/images/nodejs.png"
               alt="JavaScript Image"
@@ -53,7 +72,11 @@
 
       <div class="col">
         <div class="categories">
-          <div class="post category">
+          <div
+            class="post category"
+            name="databases"
+            onclick="handleClick(event)"
+          >
             <img
               src="/images/database.png"
               alt="Databases Image"
@@ -65,7 +88,11 @@
               <p>Store, query, and optimize your data like a pro.</p>
             </div>
           </div>
-          <div class="post category">
+          <div
+            class="post category"
+            name="productivity"
+            onclick="handleClick(event)"
+          >
             <img
               src="/images/productivity.png"
               alt="JavaScript Image"
@@ -77,7 +104,11 @@
               <p>Boost your workflow and get more done every day.</p>
             </div>
           </div>
-          <div class="post category">
+          <div
+            class="post category"
+            name="tutorials"
+            onclick="handleClick(event)"
+          >
             <img
               src="/images/tutorials.png"
               alt="JavaScript Image"

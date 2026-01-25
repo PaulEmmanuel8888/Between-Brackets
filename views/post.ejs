@@ -6,8 +6,41 @@
   <body>
     <%- include('../views/partials/header.ejs') %>
 
-    <div class="container">
-      <h1>Post</h1>
+    <div class="container post-container">
+      <h1 class="post-heading"><%= post.title %></h1>
+      <div class="post-content">
+        <div class="post-desc"><%= post.short_desc%></div>
+        <div class="post-img-div">
+          <img src="<%= post.img_url %>" alt="" />
+          <div class="post-details">
+            <div class="group">
+              <p><span>Written by</span></p>
+              <p><%= post.author %></p>
+            </div>
+            <div class="group">
+              <p><span>Published on</span></p>
+              <p><%= post.publish_date %></p>
+            </div>
+          </div>
+        </div>
+        <div class="main-post-content">
+          <%= post.content %> Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Repudiandae ullam optio aliquam magni voluptatum
+          saepe voluptates porro unde dolorum molestias eligendi quos
+          exercitationem animi dignissimos doloribus deserunt cum ipsam eveniet
+          velit hic quod, alias in aut! Eveniet, necessitatibus tenetur, in
+          dolores laudantium quam nesciunt reiciendis aut, dolor quae harum sit.
+        </div>
+        <div class="others">
+          <p>Want to check out other posts like this?</p>
+          <p>
+            Check out
+            <a href="/category/<%= post.slug %>"
+              ><span class="post-tag">#<%= post.category %></span></a
+            >
+          </p>
+        </div>
+      </div>
     </div>
     <%- include('../views/partials/footer.ejs') %>
   </body>

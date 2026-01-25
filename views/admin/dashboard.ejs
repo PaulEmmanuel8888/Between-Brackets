@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../partials/admin-header.ejs') %>
+
+    <div class="container">
+      <h1>Admin Dashboard</h1>
+      <br>
+      <h2>Latest Posts</h2>
+      <div class="latest-posts">
+        <% posts.forEach(post => { %>
+         <div class="admin-post">
+          <p><%= post.title %></p>
+          <div class="admin-post-settings">
+            <div class="edit">#</div>
+            <div class="delete">#</div>
+          </div>
+         </div>
+        <% }) %>
+      </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>
