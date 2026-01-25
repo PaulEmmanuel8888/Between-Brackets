@@ -15,8 +15,16 @@
          <div class="admin-post">
           <p><%= post.title %></p>
           <div class="admin-post-settings">
-            <div class="edit">#</div>
-            <div class="delete">#</div>
+            <div class="edit">
+              <a href="/admin/edit/<%= post.id %>">
+                <img src="/images/pencil.png" alt="edit icon">
+              </a>
+            </div>
+            <div class="delete">
+              <a href="/admin/delete/<%= post.id %>">
+                <img src="/images/trash.png" alt="delete icon">
+              </a>
+            </div>
           </div>
          </div>
         <% }) %>

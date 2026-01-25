@@ -11,6 +11,7 @@ import {
 } from "./db/index.js";
 import session from "express-session";
 import bcrypt from "bcrypt";
+import { formatDateHuman, getSlug } from "./helpers.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -134,12 +135,37 @@ app.post("/admin/login", async (req, res) => {
 });
 app.get("/admin", requireAdmin, async (req, res) => {
   const latestPosts = await getLatestPosts();
-  console.log(latestPosts);
 
   res.render("admin/dashboard", { posts: latestPosts });
 });
 app.get("/admin/create", requireAdmin, (req, res) => {
   res.render("admin/create");
+});
+app.post("/admin/create", async (req, res) => {
+  const {
+    title,
+    short_desc,
+    content,
+    author,
+    category,
+    img_url,
+    publish_date,
+  } = req.body;
+  const formattedPublishDate = formatDateHuman(publish_date);
+  const slug = getSlug(category);
+  const newPost = {
+    title: title,
+    short_desc: short_desc,
+    content: content,
+    author: author,
+    slug: slug,
+    category: category,
+    img_url: img_url,
+    publish_date: formattedPublishDate,
+  };
+  console.log(newPost);
+
+  res.redirect("/admin");
 });
 app.get("/admin/logout", (req, res) => {
   req.session.destroy((err) => {
