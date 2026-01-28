@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const updatePreview = () => {
     const markdown = textarea.value;
     preview.innerHTML = DOMPurify.sanitize(marked.parse(markdown));
+    Prism.highlightAllUnder(preview);
   };
 
   textarea.addEventListener("input", updatePreview);
