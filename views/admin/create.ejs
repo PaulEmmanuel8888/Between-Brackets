@@ -5,19 +5,35 @@
   </head>
   <body>
     <%- include('../partials/admin-header.ejs') %>
-    <div class="container">
+    <div class="container admin-container">
       <h1>Create Post</h1>
       <div class="create-container">
         <form action="/admin/create" method="POST">
-          <label for="title">Post Title</label>
-          <input type="text" id="title" name="title" required />
+          <label for="title">Post Title ( less than 80 char.)</label>
+          <input type="text" id="title" name="title" maxlength="80" required />
 
           <!-- Short Description -->
-          <label for="short_desc">Short Description</label>
-          <textarea id="short_desc" name="short_desc" required></textarea>
+          <label for="short_desc"
+            >Short Description ( less than 160 char.)</label
+          >
+          <textarea
+            id="short_desc"
+            name="short_desc"
+            maxlength="160"
+            required
+          ></textarea>
 
           <!-- Content -->
-          <label for="content">Content</label>
+          <label for="content"
+            >Content (
+            <a
+              target="_blank"
+              class="link"
+              href="https://www.markdownguide.org/cheat-sheet/"
+              >Markdown?</a
+            >
+            )</label
+          >
           <textarea id="content" name="content" required></textarea>
 
           <!-- Author -->
@@ -31,19 +47,27 @@
           />
 
           <!-- Category Dropdown -->
-          <label for="category">Category</label>
-          <select id="category" name="category" required>
-            <option value="" disabled selected>Select a category</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="CSS & Design">CSS & Design</option>
-            <option value="Node.js">Node.js</option>
-            <option value="Databases">Databases</option>
-            <option value="Productivity">Productivity</option>
-            <option value="Tutorials">Tutorials</option>
-          </select>
+
+          <div class="select-wrapper">
+            <label for="category">Select Category</label>
+            <select id="category" name="category" required>
+              <option value="" disabled selected>Select a category</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="CSS & Design">CSS & Design</option>
+              <option value="Node.js">Node.js</option>
+              <option value="Databases">Databases</option>
+              <option value="Productivity">Productivity</option>
+              <option value="Tutorials">Tutorials</option>
+            </select>
+          </div>
 
           <!-- Image URL -->
-          <label for="img_url">Image URL</label>
+          <label for="img_url"
+            >Post Image URL (
+            <a href="/admin/image-search" class="link" target="_blank"
+              >Search for image</a
+            >)
+          </label>
           <input type="text" id="img_url" name="img_url" />
 
           <!-- Publish Date -->
@@ -55,8 +79,11 @@
             value="<%= new Date().toISOString().split('T')[0] %>"
           />
 
+          <label for="preview">Live Preview</label>
+          <div id="preview" class="preview"></div>
+
           <!-- Submit -->
-          <button type="submit">Create Post</button>
+          <input type="submit" value="Create Post" />
         </form>
       </div>
     </div>

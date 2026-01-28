@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menuToggle");
   const navigation = document.querySelector(".navigation");
@@ -50,4 +48,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const dateElement = document.getElementById("current-date");
   const currentDate = new Date().getFullYear();
   dateElement.textContent = currentDate;
+
+  //Automatically increase the height of the textareas
+  const textareas = document.querySelectorAll("textarea");
+
+  const autoResize = (el) => {
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  };
+
+  textareas.forEach((textarea) => {
+    textarea.addEventListener("input", () => autoResize(textarea));
+    autoResize(textarea);
+  });
+
+  //Adding live preview for markdown in content (textarea) field
+  const textarea = document.getElementById("content");
+  const preview = document.getElementById("preview");
+
+  const updatePreview = () => {
+    const markdown = textarea.value;
+    preview.innerHTML = DOMPurify.sanitize(marked.parse(markdown));
+  };
+
+  textarea.addEventListener("input", updatePreview);
+  updatePreview();
 });

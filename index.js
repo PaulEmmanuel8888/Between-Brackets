@@ -13,6 +13,15 @@ import session from "express-session";
 import bcrypt from "bcrypt";
 import { formatDateHuman, getSlug } from "./helpers.js";
 
+//For markdown
+import { marked } from "marked";
+import DOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
+
+// Setup DOMPurify in Node
+const window = new JSDOM("").window;
+const purify = DOMPurify(window);
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -72,6 +81,8 @@ app.get("/", async (req, res) => {
 app.get("/posts/:id", async (req, res) => {
   const postId = req.params.id;
   const post = await getPostById(postId);
+  // Convert Markdown → HTML, then sanitize
+  const htmlContent = purify.sanitize(marked.parse(post.content));
   console.log(post);
   res.render("post.ejs", { post: post });
 });
@@ -123,8 +134,6 @@ app.post("/admin/login", async (req, res) => {
   if (!validUser) {
     return res.redirect("/admin/login");
   }
-
-  console.log(validUser);
 
   req.session.isAdmin = true;
 
@@ -178,5 +187,5 @@ app.get("/admin/logout", (req, res) => {
 });
 // Listener
 app.listen(PORT, () => {
-  console.log(`Server running successfully at port ${PORT}`);
+  console.log(`Server running successfully at http://localhost:${PORT}`);
 });
