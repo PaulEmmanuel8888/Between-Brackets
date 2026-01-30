@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
+  <body>
+    <div class="image-container">
+      <h1>Image Finder</h1>
+      <form id="search-form">
+        <input type="text" id="search-box" placeholder="Search..." />
+        <button>
+          <img
+            class="search-icon"
+            src="/images/search-icon.svg"
+            alt="Search Button"
+          />
+        </button>
+      </form>
+
+      <div id="search-result"></div>
+      <button id="show-more-btn">Show More</button>
+
+      <footer id="footer">Pictures from Unsplash.com</footer>
+    </div>
+  </body>
+</html>

@@ -81,7 +81,7 @@ app.get("/", async (req, res) => {
 app.get("/posts/:id", async (req, res) => {
   const postId = req.params.id;
   const post = await getPostById(postId);
-  // Convert Markdown → HTML, then sanitize
+  // Convert Markdown first to HTML, then sanitize
   const htmlContent = purify.sanitize(marked.parse(post.content));
   console.log(post);
   res.render("post.ejs", { post: post });
@@ -185,6 +185,12 @@ app.get("/admin/logout", (req, res) => {
     res.redirect("/admin/login");
   });
 });
+
+//Admin Image Finder
+app.get("/admin/image-search", requireAdmin, (req, res) => {
+  res.render("admin/image-search");
+});
+
 // Listener
 app.listen(PORT, () => {
   console.log(`Server running successfully at http://localhost:${PORT}`);
