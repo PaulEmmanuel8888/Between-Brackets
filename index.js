@@ -190,6 +190,21 @@ app.get("/admin/logout", (req, res) => {
 app.get("/admin/image-search", requireAdmin, (req, res) => {
   res.render("admin/image-search");
 });
+app.get("/api/search-images", requireAdmin, async (req, res) => {
+  const { query, page = 1 } = req.query;
+
+  try {
+    const response = await fetch(
+      `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.UNSPLASH_API_KEY}&page=${page}&per_page=12&fm=jpg&w=3000&fit=max`,
+    );
+
+    const data = await response.json();
+
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch images" });
+  }
+});
 
 // Listener
 app.listen(PORT, () => {

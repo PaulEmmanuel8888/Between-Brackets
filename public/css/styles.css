@@ -748,13 +748,45 @@ textarea:focus {
   display: none;
 }
 
-.image-container #picture {
+.image-container .picture {
   position: relative;
 }
-.image-container #picture:hover {
+.image-container .picture:hover {
   filter: brightness(50%);
   transform: scale(1.05);
   transition:
     transform 0.3s ease,
     transform 0.3s ease;
+}
+.image-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* overlay button */
+#download-btn {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  display: none;
+  pointer-events: none;
+  border: none;
+  padding: 8px;
+  color: white;
+  background: transparent;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+.copy-btn {
+  transition: all 0.25s ease;
+}
+
+.image-wrapper:hover #download-btn {
+  cursor: pointer;
+  display: inline;
+  pointer-events: auto;
+  transform: translateY(0);
 }
