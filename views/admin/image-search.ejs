@@ -6,6 +6,8 @@
   <body>
     <div class="image-container">
       <h1>Image Finder</h1>
+      <div id="toast-container"></div>
+
       <form id="search-form">
         <input type="text" id="search-box" placeholder="Search..." />
         <button>
@@ -16,7 +18,25 @@
           />
         </button>
       </form>
-
+      <!-- From Uiverse.io by Li-Deheng -->
+      <div class="loader" id="loader">
+        <div class="circle">
+          <div class="dot"></div>
+          <div class="outline"></div>
+        </div>
+        <div class="circle">
+          <div class="dot"></div>
+          <div class="outline"></div>
+        </div>
+        <div class="circle">
+          <div class="dot"></div>
+          <div class="outline"></div>
+        </div>
+        <div class="circle">
+          <div class="dot"></div>
+          <div class="outline"></div>
+        </div>
+      </div>
       <div id="search-result"></div>
       <button id="show-more-btn">Show More</button>
 
