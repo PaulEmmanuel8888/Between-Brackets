@@ -34,3 +34,24 @@ export async function getLatestPosts() {
 
   return result.rows;
 }
+export async function createPost(newPost) {
+  const query = `
+  INSERT INTO posts
+  (title, short_desc, content, author, slug, category, img_url, publish_date)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+  RETURNING *;
+`;
+
+  const values = [
+    newPost.title,
+    newPost.short_desc,
+    newPost.content,
+    newPost.author,
+    newPost.slug,
+    newPost.category,
+    newPost.img_url,
+    newPost.publish_date,
+  ];
+
+  const result = await db.query(query, values);
+}

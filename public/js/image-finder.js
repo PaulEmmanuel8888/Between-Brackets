@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const fragment = document.createDocumentFragment();
+      console.log(data);
 
       data.results.forEach((result) => {
-        // create image
         const image = document.createElement("img");
         image.src = result.urls.small;
         image.srcset = `

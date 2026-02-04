@@ -8,6 +8,7 @@ import {
   getPostById,
   getPostsByCategory,
   getLatestPosts,
+  createPost,
 } from "./db/index.js";
 import session from "express-session";
 import bcrypt from "bcrypt";
@@ -83,7 +84,9 @@ app.get("/posts/:id", async (req, res) => {
   const post = await getPostById(postId);
   // Convert Markdown first to HTML, then sanitize
   const htmlContent = purify.sanitize(marked.parse(post.content));
-  console.log(post);
+
+  post.content = htmlContent;
+
   res.render("post.ejs", { post: post });
 });
 
@@ -173,7 +176,7 @@ app.post("/admin/create", async (req, res) => {
     publish_date: formattedPublishDate,
   };
   console.log(newPost);
-
+  createPost(newPost);
   res.redirect("/admin");
 });
 app.get("/admin/logout", (req, res) => {

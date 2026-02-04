@@ -25,9 +25,10 @@
           <div class="post-info">
             <h2> <a href="/posts/<%= post.id %>"><%= post.title %></a> </h2>
             <div class="user-info">
-              <img src="images/avatar.png" alt="" />
+              <img src="/images/avatar.png" alt="" />
               <span><%= post.author %>,</span>
               <span><%= post.publish_date %></span>
+              <br>
               <a href="/category/<%= post.slug %>"
               ><span class="post-tag">#<%= post.category %></span></a
             >
@@ -53,9 +54,10 @@
           <div class="post-info">
             <h2> <a href="/posts/<%= post.id %>"><%= post.title %></a> </h2>
             <div class="user-info">
-              <img src="images/avatar.png" alt="" />
+              <img src="/images/avatar.png" alt="" />
               <span><%= post.author %>,</span>
               <span><%= post.publish_date %></span>
+              <br>
               <a href="/category/<%= post.slug %>"
               ><span class="post-tag">#<%= post.category %></span></a
             >

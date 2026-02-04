@@ -3,6 +3,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const navigation = document.querySelector(".navigation");
   const navItems = document.querySelectorAll(".navigation li");
 
+  function makeAllImagesCrisp() {
+    const images = document.querySelectorAll(".container img");
+
+    images.forEach((img) => {
+      if (img.width < 150) return;
+      if (img.srcset) return;
+
+      const base = img.src;
+
+      const small = base.replace(/w=\d+/, "w=400");
+      const regular = base.replace(/w=\d+/, "w=1080");
+      const full = base.replace(/w=\d+/, "w=1920");
+
+      img.src = small;
+      img.srcset = `
+      ${small} 400w,
+      ${regular} 1080w,
+      ${full} 1920w
+    `;
+      img.sizes = "(max-width: 768px) 100vw, 33vw";
+      img.loading = "lazy";
+      img.style.width = "100%";
+      img.style.height = "auto";
+      img.style.display = "block";
+    });
+  }
+
+  window.addEventListener("load", makeAllImagesCrisp);
+
   // Get the current page URL
   const currentPage = window.location.pathname;
 
