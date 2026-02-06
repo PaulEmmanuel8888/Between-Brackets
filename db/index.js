@@ -55,3 +55,6 @@ export async function createPost(newPost) {
 
   const result = await db.query(query, values);
 }
+export async function deletePost(id) {
+  const result = await db.query("DELETE FROM posts WHERE id = $1", [id]);
+}

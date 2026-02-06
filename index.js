@@ -9,6 +9,7 @@ import {
   getPostsByCategory,
   getLatestPosts,
   createPost,
+  deletePost,
 } from "./db/index.js";
 import session from "express-session";
 import bcrypt from "bcrypt";
@@ -179,6 +180,13 @@ app.post("/admin/create", async (req, res) => {
   createPost(newPost);
   res.redirect("/admin");
 });
+
+app.get("/admin/delete/:id", async (req, res) => {
+  const postId = req.params.id;
+  deletePost(postId);
+  res.redirect("/admin");
+});
+
 app.get("/admin/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
