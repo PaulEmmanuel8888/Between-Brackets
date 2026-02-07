@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../partials/admin-header.ejs') %>
+    <div class="container admin-container">
+      <h1>Edit Post</h1>
+      <div class="create-container">
+        <form action="/admin/edit" method="POST">
+          <input type="hidden" name="id" value="<%= post.id %>" />
+          <label for="title">Post Title ( less than 80 char.)</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            maxlength="80"
+            value="<%= post.title%>"
+            required
+          />
+
+          <!-- Short Description -->
+          <label for="short_desc"
+            >Short Description ( less than 160 char.)</label
+          >
+          <textarea id="short_desc" name="short_desc" maxlength="160" required>
+<%= post.short_desc %></textarea
+          >
+
+          <!-- Content -->
+          <label for="content"
+            >Content (
+            <a
+              target="_blank"
+              class="link"
+              href="https://www.markdownguide.org/cheat-sheet/"
+              >Markdown?</a
+            >
+            )</label
+          >
+          <textarea id="content" name="content" required>
+<%= post.content %></textarea
+          >
+
+          <!-- Author -->
+          <label for="author">Author</label>
+          <input
+            type="text"
+            id="author"
+            name="author"
+            value="<%= post.author %>"
+            required
+          />
+
+          <!-- Category Dropdown -->
+
+          <div class="select-wrapper">
+            <label for="category">Select Category</label>
+            <select id="category" name="category" required>
+              <option value="" disabled selected>Select a category</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="CSS & Design">CSS & Design</option>
+              <option value="Node.js">Node.js</option>
+              <option value="Databases">Databases</option>
+              <option value="Productivity">Productivity</option>
+              <option value="Tutorials">Tutorials</option>
+            </select>
+          </div>
+
+          <!-- Image URL -->
+          <label for="img_url"
+            >Post Image URL (
+            <a href="/admin/image-search" class="link" target="_blank"
+              >Search for image</a
+            >)
+          </label>
+          <input
+            type="text"
+            id="img_url"
+            name="img_url"
+            value="<%= post.img_url %>"
+          />
+
+          <!-- Publish Date -->
+          <label for="publish_date">Publish Date</label>
+          <input
+            type="date"
+            id="publish_date"
+            name="publish_date"
+            value="<%= new Date().toISOString().split('T')[0] %>"
+          />
+          <label for="preview">Live Preview</label>
+          <div id="preview" class="preview"></div>
+
+          <!-- Submit -->
+          <input type="submit" value="Save Post" />
+        </form>
+      </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>

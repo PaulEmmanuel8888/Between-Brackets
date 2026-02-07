@@ -10,6 +10,7 @@ import {
   getLatestPosts,
   createPost,
   deletePost,
+  updatePost,
 } from "./db/index.js";
 import session from "express-session";
 import bcrypt from "bcrypt";
@@ -154,7 +155,7 @@ app.get("/admin", requireAdmin, async (req, res) => {
 app.get("/admin/create", requireAdmin, (req, res) => {
   res.render("admin/create");
 });
-app.post("/admin/create", async (req, res) => {
+app.post("/admin/create", requireAdmin, async (req, res) => {
   const {
     title,
     short_desc,
@@ -181,9 +182,47 @@ app.post("/admin/create", async (req, res) => {
   res.redirect("/admin");
 });
 
-app.get("/admin/delete/:id", async (req, res) => {
+app.get("/admin/delete/:id", requireAdmin, async (req, res) => {
   const postId = req.params.id;
-  deletePost(postId);
+  await deletePost(postId);
+  res.redirect("/admin");
+});
+
+app.get("/admin/edit/:id", requireAdmin, async (req, res) => {
+  const postId = req.params.id;
+  const post = await getPostById(postId);
+
+  res.render("admin/edit", { post: post });
+});
+
+app.post("/admin/edit", requireAdmin, async (req, res) => {
+  const {
+    id,
+    title,
+    short_desc,
+    content,
+    author,
+    category,
+    img_url,
+    publish_date,
+  } = req.body;
+  const postId = id;
+  const slug = getSlug(category);
+  const formattedPublishDate = formatDateHuman(publish_date);
+
+  const updatedPost = {
+    title: title,
+    short_desc: short_desc,
+    content: content,
+    author: author,
+    slug: slug,
+    category: category,
+    img_url: img_url,
+    publish_date: formattedPublishDate,
+  };
+
+  await updatePost(postId, updatedPost);
+
   res.redirect("/admin");
 });
 

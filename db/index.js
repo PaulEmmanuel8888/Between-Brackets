@@ -55,6 +55,50 @@ export async function createPost(newPost) {
 
   const result = await db.query(query, values);
 }
+
+export async function updatePost(id, updatedPost) {
+  const {
+    title,
+    short_desc,
+    content,
+    author,
+    slug,
+    category,
+    img_url,
+    publish_date,
+  } = updatedPost;
+
+  const query = `
+    UPDATE posts
+    SET
+      title = $1,
+      short_desc = $2,
+      content = $3,
+      author = $4,
+      slug = $5,
+      category = $6,
+      img_url = $7,
+      publish_date = $8
+    WHERE id = $9
+    RETURNING *;
+  `;
+
+  const values = [
+    title,
+    short_desc,
+    content,
+    author,
+    slug,
+    category,
+    img_url,
+    publish_date,
+    id,
+  ];
+
+  const result = await db.query(query, values);
+  return result.rows[0];
+}
+
 export async function deletePost(id) {
   const result = await db.query("DELETE FROM posts WHERE id = $1", [id]);
 }
