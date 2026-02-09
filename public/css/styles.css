@@ -241,6 +241,13 @@ footer {
     object-fit: cover;
     object-fit: cover;
   }
+  .back-btn {
+    width: 400px;
+  }
+  .back-btn button {
+    padding: 5px;
+    border-radius: 10px;
+  }
 }
 
 /* Pagination Styles */
@@ -1010,4 +1017,32 @@ textarea:focus {
   pointer-events: none;
   padding: 20px;
   border-radius: 10px;
+}
+
+/* Error Page Styles */
+.error-page img {
+  width: 50%;
+  height: 50%;
+}
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+  width: 90%;
+}
+.back-btn {
+  width: 30%;
+}
+.back-btn button {
+  background-color: #333;
+  width: 100%;
+  color: white;
+  cursor: pointer;
+  height: 3rem;
+  border-radius: 15px;
+  padding: 10px;
+  border: none;
+  transition: all 0.3s ease-in;
 }

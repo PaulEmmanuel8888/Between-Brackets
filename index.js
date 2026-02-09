@@ -84,6 +84,9 @@ app.get("/", async (req, res) => {
 app.get("/posts/:id", async (req, res) => {
   const postId = req.params.id;
   const post = await getPostById(postId);
+  if (!post) {
+    return res.status(404).render("404");
+  }
   // Convert Markdown first to HTML, then sanitize
   const htmlContent = purify.sanitize(marked.parse(post.content));
 
@@ -184,6 +187,7 @@ app.post("/admin/create", requireAdmin, async (req, res) => {
 
 app.get("/admin/delete/:id", requireAdmin, async (req, res) => {
   const postId = req.params.id;
+
   await deletePost(postId);
   res.redirect("/admin");
 });
@@ -191,6 +195,9 @@ app.get("/admin/delete/:id", requireAdmin, async (req, res) => {
 app.get("/admin/edit/:id", requireAdmin, async (req, res) => {
   const postId = req.params.id;
   const post = await getPostById(postId);
+  if (!post) {
+    return res.status(404).render("404");
+  }
 
   res.render("admin/edit", { post: post });
 });
@@ -254,6 +261,10 @@ app.get("/api/search-images", requireAdmin, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch images" });
   }
+});
+
+app.use((req, res) => {
+  res.status(404).render("404");
 });
 
 // Listener
