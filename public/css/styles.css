@@ -56,7 +56,6 @@ header {
 .logo-img {
   width: 100px;
   height: 100px;
-  transform: rotate(-45deg);
 }
 .header .logo span {
   color: crimson;
