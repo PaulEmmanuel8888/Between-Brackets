@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../views/partials/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../views/partials/header.ejs') %>
+    <div class="image-container search-container container">
+      <h1>Looking for a particular post?</h1>
+      <form id="search-form" action="/search" method="POST">
+        <input
+          name="search"
+          type="text"
+          id="search-box"
+          onsubmit=""
+          placeholder="Search..."
+        />
+        <button type="submit">
+          <img
+            class="search-icon"
+            src="/images/search-icon.svg"
+            alt="Search Button"
+          />
+        </button>
+      </form>
+    </div>
+
+    <%- include('../views/partials/footer.ejs') %>
+  </body>
+</html>

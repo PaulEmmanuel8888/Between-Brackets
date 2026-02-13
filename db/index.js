@@ -102,3 +102,13 @@ export async function updatePost(id, updatedPost) {
 export async function deletePost(id) {
   const result = await db.query("DELETE FROM posts WHERE id = $1", [id]);
 }
+export async function searchPostsByTitle(searchTerm) {
+  const query = `
+    SELECT *
+    FROM posts
+    WHERE title ILIKE '%' || $1 || '%'
+    ORDER BY created_at DESC
+  `;
+  const result = await db.query(query, [searchTerm]);
+  return result.rows;
+}

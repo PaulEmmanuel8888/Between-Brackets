@@ -11,6 +11,7 @@ import {
   createPost,
   deletePost,
   updatePost,
+  searchPostsByTitle,
 } from "./db/index.js";
 import session from "express-session";
 import bcrypt from "bcrypt";
@@ -125,6 +126,36 @@ app.get("/category/:slug", async (req, res) => {
   });
 });
 
+//Search Page
+app.get("/search", (req, res) => {
+  res.render("search");
+});
+app.post("/search", async (req, res) => {
+  const searchTerm = req.body.search;
+  const posts = await searchPostsByTitle(searchTerm);
+
+  const page = parseInt(req.query.page) || 1;
+  const postsPerPage = 6;
+
+  const startIndex = (page - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+
+  const paginatedPosts = posts.slice(startIndex, endIndex);
+
+  const column1Posts = paginatedPosts.filter((_, i) => i % 2 === 0);
+  const column2Posts = paginatedPosts.filter((_, i) => i % 2 !== 0);
+
+  const totalPages = Math.ceil(posts.length / postsPerPage);
+
+  res.render("search-results.ejs", {
+    column1Posts,
+    column2Posts,
+    page,
+    totalPages,
+    baseUrl: `/search-results/${searchTerm}`,
+  });
+});
+
 //Admin Pages
 app.get("/admin/login", (req, res) => {
   if (req.session.isAdmin) {
@@ -180,7 +211,6 @@ app.post("/admin/create", requireAdmin, async (req, res) => {
     img_url: img_url,
     publish_date: formattedPublishDate,
   };
-  console.log(newPost);
   createPost(newPost);
   res.redirect("/admin");
 });

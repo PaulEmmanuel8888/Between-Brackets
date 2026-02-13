@@ -108,7 +108,7 @@ header {
 
 .post .post-img {
   width: 100%;
-  height: 350px;
+  max-height: 350px;
   object-fit: cover;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -1054,4 +1054,26 @@ textarea:focus {
   padding: 10px;
   border: none;
   transition: all 0.3s ease-in;
+}
+/* Search Button */
+.search-container h1 {
+  text-align: center;
+  margin: 10px 0;
+}
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+/* Test */
+.post-img,
+.post-img-div img,
+.category img,
+.image-container #search-result img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
 }

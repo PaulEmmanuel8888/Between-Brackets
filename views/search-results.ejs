@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../views/partials/head.ejs') %>
+  </head>
+  <body>
+    <!-- nav menu start -->
+    <%- include('../views/partials/header.ejs') %>
+    <!-- nav menu end -->
+
+    <!-- main content start -->
+    <div class="container main">
+      <!-- column1 -->
+      <div class="col">
+        <!-- EJS For Loop Start-->
+
+        <% column1Posts.forEach((post, index) => { %>
+        <div class="post">
+          <img
+            class="post-img"
+            loading="lazy"
+            src="<%= post.img_url %>"
+            alt="post<% index%>-image"
+          />
+          <div class="post-info">
+            <h2> <a href="/posts/<%= post.id %>"><%= post.title %></a> </h2>
+            <div class="user-info">
+              <img src="/images/avatar.png" alt="" />
+              <span><%= post.author %>,</span>
+              <span><%= post.publish_date %></span>
+              <br>
+              <a href="/category/<%= post.slug %>"
+              ><span class="post-tag">#<%= post.category %></span></a
+            >
+            </div>
+            <p><%= post.shortDesc %></p>
+          </div>
+        </div>
+        <% }) %>
+        <!-- EJS For Loop End-->
+      </div>
+      <!-- column2 -->
+      <div class="col">
+        <!-- EJS For Loop Start-->
+
+        <% column2Posts.forEach((post, index) => { %>
+        <div class="post">
+          <img
+            class="post-img"
+            loading="lazy"
+            src="<%= post.img_url %>"
+            alt="post<% index%>-image"
+          />
+          <div class="post-info">
+            <h2> <a href="/posts/<%= post.id %>"><%= post.title %></a> </h2>
+            <div class="user-info">
+              <img src="/images/avatar.png" alt="" />
+              <span><%= post.author %>,</span>
+              <span><%= post.publish_date %></span>
+              <br>
+              <a href="/category/<%= post.slug %>"
+              ><span class="post-tag">#<%= post.category %></span></a
+            >
+            </div>
+            <p><%= post.shortDesc %></p>
+          </div>
+        </div>
+        <% }) %>
+        <!-- EJS For Loop End-->
+      </div>
+    </div>
+    <!-- main content end -->
+    <%- include('partials/pagination', { page, totalPages, baseUrl }) %>
+
+    <!-- footer start -->
+    <%- include('../views/partials/footer.ejs') %>
+    <!-- footer end -->
+  </body>
+</html>
