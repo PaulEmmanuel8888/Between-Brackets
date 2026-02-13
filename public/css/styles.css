@@ -359,6 +359,7 @@ header {
   margin: 20px 0px;
 }
 .post-details {
+  width: fit-content;
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -385,6 +386,15 @@ header {
 }
 .main-post-content {
   line-height: 32px;
+}
+.main-post-content :is(h1, h2, h3, h4, h5, h6) {
+  text-align: center;
+  margin: 5px 0;
+}
+
+.main-post-content img {
+  border-radius: 10px;
+  margin: 15px 0;
 }
 .others {
   margin: 25px 0px;
