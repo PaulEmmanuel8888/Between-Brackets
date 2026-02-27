@@ -101,6 +101,7 @@ app.get("/categories", (req, res) => {
 });
 app.get("/category/:slug", async (req, res) => {
   const slug = req.params.slug;
+  const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
 
   const page = parseInt(req.query.page) || 1;
   const postsPerPage = 6;
@@ -118,6 +119,7 @@ app.get("/category/:slug", async (req, res) => {
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
   res.render("category.ejs", {
+    categoryName,
     column1Posts,
     column2Posts,
     page,
@@ -147,7 +149,11 @@ app.post("/search", async (req, res) => {
 
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
+  const numberOfPosts = column1Posts.length + column2Posts;
+
   res.render("search-results.ejs", {
+    numberOfPosts,
+    searchTerm,
     column1Posts,
     column2Posts,
     page,

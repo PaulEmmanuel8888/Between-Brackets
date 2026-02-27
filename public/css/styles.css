@@ -52,12 +52,10 @@ header {
   flex-direction: row;
   justify-content: space-between;
 }
-
-.logo-img {
-  width: 100px;
-  height: 100px;
+.logo {
+  font-size: 1.5rem;
 }
-.header .logo span {
+.logo span {
   color: crimson;
 }
 
@@ -240,6 +238,7 @@ footer {
     object-fit: cover;
     object-fit: cover;
   }
+
   .back-btn {
     width: 400px;
   }
@@ -248,7 +247,12 @@ footer {
     border-radius: 10px;
   }
 }
-
+.category-name,
+.search-result {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
 /* Pagination Styles */
 .pagination {
   display: flex;
@@ -1076,4 +1080,21 @@ textarea:focus {
   height: 350px;
   object-fit: cover;
   border-radius: 8px;
+}
+.not-found {
+  width: 80%;
+  height: 80%;
+  max-height: 600px;
+  max-width: 400px;
+  margin: 10vh auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+}
+.not-found img {
+  width: 30%;
+  height: 30%;
+  margin: 20px 0;
 }

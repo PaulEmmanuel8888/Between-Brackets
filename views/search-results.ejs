@@ -7,11 +7,24 @@
     <!-- nav menu start -->
     <%- include('../views/partials/header.ejs') %>
     <!-- nav menu end -->
-
+    <div class="search-result">
+      <h1>Posts with "<%= searchTerm %>"</h1>
+    </div>
     <!-- main content start -->
     <div class="container main">
       <!-- column1 -->
-      <div class="col">
+
+       <% if (numberOfPosts < 1) { %>
+        
+          <div class="not-found">
+            <img src="/images/notfound.svg" alt="">
+            <h2>No Posts Found.</h2>
+          </div>
+            
+            
+          
+          <% } else { %>
+              <div class="col">
         <!-- EJS For Loop Start-->
 
         <% column1Posts.forEach((post, index) => { %>
@@ -68,6 +81,12 @@
         <% }) %>
         <!-- EJS For Loop End-->
       </div>
+       <% } %>
+
+       
+
+        
+   
     </div>
     <!-- main content end -->
     <%- include('partials/pagination', { page, totalPages, baseUrl }) %>
