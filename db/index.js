@@ -3,15 +3,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 //Setting up the Postgresql Database
-const db = new pg.Client({
-  user: process.env.USER,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
-  port: process.env.PG_PORT,
+const db = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
-
-db.connect();
 
 export async function getAllPosts() {
   const result = await db.query("SELECT * FROM posts ORDER BY created_at DESC");
